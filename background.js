@@ -1,25 +1,31 @@
-function reddenPage() {
-  var delayVar = 0;
-  var numVar = 0;
-  var bg = document.body.style;
-  const colorlist = ["red", "orange", "yellow", "green", "blue", "purple"]
+var toggle = 0;
+var numVar = 0;
+const colorlist = ["red", "orange", "yellow", "green", "blue", "purple"];
 
-  var myfunc = setInterval(function() {
-  	numVar = Math.floor(Math.random() * 6);
-  	bg.backgroundColor = colorlist[numVar]
-  	// No delay on open
-  	if (delayVar == 0) {
-  		delayVar = 1000;
-  	}
-
-  }, delayVar)
+function mainFunc(bg_color) {
+  document.body.style.backgroundColor = bg_color;
 }
 
 chrome.action.onClicked.addListener((tab) => {
-  if(!tab.url.includes("chrome://")) {
+  clearInterval();
+  if (toggle == 0) {
+    toggle = 1;
+    console.log(toggle);
+  } else if (toggle == 1) {
+    toggle = 0;
+    console.log(toggle);
+  }
+  var myfunc = setInterval(function() {
+    if (toggle == 1) {
+      numVar = Math.floor(Math.random() * 6);
+      bgcolor = colorlist[numVar];
+    } else if (toggle == 0) {
+      bgcolor = "white";
+    }
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: reddenPage
+      function: mainFunc,
+      args: [bgcolor],
     });
-  }
+  }, 50);
 });
