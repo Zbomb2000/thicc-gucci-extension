@@ -27,5 +27,5 @@ chrome.action.onClicked.addListener((tab) => {
       function: mainFunc,
       args: [bgcolor],
     });
-  }, 10);
+  }, 50);
 });
