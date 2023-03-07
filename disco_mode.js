@@ -1,7 +1,8 @@
 var delayVar = 0;
 var numVar = 0;
 var bg = document.body.style;
-const colorlist = ["red", "orange", "yellow", "green", "blue", "purple"]
+const colorlist = ["red", "orange", "yellow", "green", "blue", "purple"];
+document.write("i can smell you");
 
 var myfunc = setInterval(function() {
 	numVar = Math.floor(Math.random() * 6);
